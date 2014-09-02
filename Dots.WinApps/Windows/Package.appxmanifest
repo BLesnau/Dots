@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
 
-  <Identity Name="b56fea58-3990-45f5-b830-773ce98a5a81"
-            Publisher="CN=b.lesnau"
-            Version="1.0.0.0" />
+   <Identity Name="b56fea58-3990-45f5-b830-773ce98a5a81"
+             Publisher="CN=b.lesnau"
+             Version="1.0.0.0" />
 
-  <Properties>
-    <DisplayName>Dots.App.Windows</DisplayName>
-    <PublisherDisplayName>b.lesnau</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
-  </Properties>
+   <Properties>
+      <DisplayName>Dots.WinApps.Windows</DisplayName>
+      <PublisherDisplayName>b.lesnau</PublisherDisplayName>
+      <Logo>Assets\StoreLogo.png</Logo>
+   </Properties>
 
-  <Prerequisites>
-    <OSMinVersion>6.3.0</OSMinVersion>
-    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
-  </Prerequisites>
+   <Prerequisites>
+      <OSMinVersion>6.3.0</OSMinVersion>
+      <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+   </Prerequisites>
 
-  <Resources>
-    <Resource Language="x-generate"/>
-  </Resources>
+   <Resources>
+      <Resource Language="x-generate"/>
+   </Resources>
 
-  <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="Dots.App.Windows.App">
-        <m2:VisualElements
-            DisplayName="Dots.App.Windows"
-            Square150x150Logo="Assets\Logo.png"
-            Square30x30Logo="Assets\SmallLogo.png"
-            Description="Dots.App.Windows"
-            ForegroundText="light"
-            BackgroundColor="#464646">
+   <Applications>
+      <Application Id="App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="Dots.WinApps.Shared.App">
+         <m2:VisualElements
+             DisplayName="Dots.WinApps.Windows"
+             Square150x150Logo="Assets\Logo.png"
+             Square30x30Logo="Assets\SmallLogo.png"
+             Description="Dots.WinApps.Windows"
+             ForegroundText="light"
+             BackgroundColor="#464646">
             <m2:SplashScreen Image="Assets\SplashScreen.png" />
-        </m2:VisualElements>
-    </Application>
-  </Applications>
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
+         </m2:VisualElements>
+      </Application>
+   </Applications>
+   <Capabilities>
+      <Capability Name="internetClient" />
+   </Capabilities>
 </Package>
