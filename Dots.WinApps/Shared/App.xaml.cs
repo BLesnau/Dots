@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
+using Microsoft.WindowsAzure.MobileServices;
 #if WINDOWS_APP
 using Dots.WinApps.Windows;
 #endif
@@ -23,6 +23,8 @@ namespace Dots.WinApps.Shared
    /// </summary>
    public sealed partial class App : Application
    {
+      public static readonly MobileServiceClient MobileService = new MobileServiceClient( "https://dots.azure-mobile.net/", "dEmInfiokMvJZTBagaDqISqWgiydMw55" );
+
 #if WINDOWS_PHONE_APP
       private TransitionCollection transitions;
 #endif
@@ -130,6 +132,17 @@ namespace Dots.WinApps.Shared
 
          // TODO: Save application state and stop any background activity
          deferral.Complete();
+      }
+
+      protected override void OnActivated( IActivatedEventArgs args )
+      {
+         base.OnActivated( args );
+#if WINDOWS_PHONE_APP
+            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
+            {
+                App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+            }
+#endif
       }
    }
 }

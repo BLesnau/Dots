@@ -1,13 +1,23 @@
 ﻿<Page
-    x:Class="Dots.WinApps.Windows.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Dots.WinApps.Windows"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+        x:Class="Dots.WinApps.Windows.MainPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:Dots.WinApps.Windows"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shared="using:Dots.WinApps.Shared"
+        mc:Ignorable="d">
+
+    <Page.DataContext>
+        <shared:MainPageVm></shared:MainPageVm>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Facebook" HorizontalAlignment="Stretch" Command="{Binding FacebookClick}"></Button>
+            <Button Content="Google" HorizontalAlignment="Stretch" Command="{Binding GoogleClick}"></Button>
+            <Button Content="Twitter" HorizontalAlignment="Stretch" Command="{Binding TwitterClick}"></Button>
+            <Button Content="Microsoft" HorizontalAlignment="Stretch" Command="{Binding MicrosoftClick}"></Button>
+        </StackPanel>
     </Grid>
 </Page>
