@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Web.Http;
-using Dots.Service.DataObjects;
+using Dots.Service.Migrations;
 using Dots.Service.Models;
 using Microsoft.WindowsAzure.Mobile.Service;
 
@@ -23,7 +21,10 @@ namespace Dots.Service
          // line. Comment it out again when you deploy your service for production use.
          // config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
-         Database.SetInitializer( new DotsServiceInitializer() );
+         //Database.SetInitializer( new DotsServiceInitializer() );
+
+         var migrator = new DbMigrator( new Configuration() );
+         migrator.Update();
 
          config.SetIsHosted( true );
       }
@@ -33,16 +34,16 @@ namespace Dots.Service
    {
       protected override void Seed( DotsServiceContext context )
       {
-         List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = "1", Text = "First item", Complete = false },
-                new TodoItem { Id = "2", Text = "Second item", Complete = false },
-            };
+         //List<TodoItem> todoItems = new List<TodoItem>
+         //   {
+         //       new TodoItem { Id = "1", Text = "First item", Complete = false },
+         //       new TodoItem { Id = "2", Text = "Second item", Complete = false },
+         //   };
 
-         foreach ( TodoItem todoItem in todoItems )
-         {
-            context.Set<TodoItem>().Add( todoItem );
-         }
+         //foreach ( TodoItem todoItem in todoItems )
+         //{
+         //   context.Set<TodoItem>().Add( todoItem );
+         //}
 
          base.Seed( context );
       }
