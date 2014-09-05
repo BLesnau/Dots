@@ -7,12 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="using:Dots.WinApps.Shared"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Page.DataContext>
-        <shared:MainPageVm></shared:MainPageVm>
-    </Page.DataContext>
-
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    d:DataContext="{d:DesignInstance Type=shared:MainPageVm}"
+>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Facebook" HorizontalAlignment="Stretch" Command="{Binding FacebookClick}"></Button>

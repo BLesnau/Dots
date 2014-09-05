@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.WindowsAzure.MobileServices;
+
 #if WINDOWS_APP
 using Dots.WinApps.Windows;
 #endif
@@ -24,6 +25,7 @@ namespace Dots.WinApps.Shared
    public sealed partial class App : Application
    {
       public static readonly MobileServiceClient MobileService = new MobileServiceClient( "https://dots.azure-mobile.net/", "dEmInfiokMvJZTBagaDqISqWgiydMw55" );
+      //public static MobileServiceClient MobileService = new MobileServiceClient( "http://169.254.80.80:2214" );
 
 #if WINDOWS_PHONE_APP
       private TransitionCollection transitions;

@@ -9,42 +9,42 @@ using Dots.Service.Models;
 
 namespace Dots.Service.Controllers
 {
-   public class TodoItemController : TableController<TodoItem>
+   public class UserController : TableController<User>
    {
       protected override void Initialize( HttpControllerContext controllerContext )
       {
          base.Initialize( controllerContext );
-         DotsServiceContext context = new DotsServiceContext();
-         DomainManager = new EntityDomainManager<TodoItem>( context, Request, Services );
+         var context = new DotsServiceContext();
+         DomainManager = new EntityDomainManager<User>( context, Request, Services );
       }
 
       // GET tables/TodoItem
-      public IQueryable<TodoItem> GetAllTodoItems()
+      public IQueryable<User> GetAllUsers()
       {
          return Query();
       }
 
       // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-      public SingleResult<TodoItem> GetTodoItem( string id )
+      public SingleResult<User> GetUser( string id )
       {
          return Lookup( id );
       }
 
       // PATCH tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-      public Task<TodoItem> PatchTodoItem( string id, Delta<TodoItem> patch )
+      public Task<User> PatchUser( string id, Delta<User> patch )
       {
          return UpdateAsync( id, patch );
       }
 
       // POST tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-      public async Task<IHttpActionResult> PostTodoItem( TodoItem item )
+      public async Task<IHttpActionResult> PostUser( User item )
       {
-         TodoItem current = await InsertAsync( item );
+         User current = await InsertAsync( item );
          return CreatedAtRoute( "Tables", new { id = current.Id }, current );
       }
 
       // DELETE tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-      public Task DeleteTodoItem( string id )
+      public Task DeleteUser( string id )
       {
          return DeleteAsync( id );
       }
