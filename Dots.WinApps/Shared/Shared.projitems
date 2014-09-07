@@ -16,6 +16,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPageVm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PopupHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceDataModels\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CredentialsHelper.cs" />
   </ItemGroup>
 </Project>
