@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Navigation;
 #if WINDOWS_APP
 using Dots.WinApps.Windows;
 #endif
-
+using Microsoft.WindowsAzure.MobileServices;
 #if WINDOWS_PHONE_APP
 using Dots.WinApps.WindowsPhone;
 #endif
@@ -44,7 +44,7 @@ namespace Dots.WinApps.Shared
       /// search results, and so forth.
       /// </summary>
       /// <param name="e">Details about the launch request and process.</param>
-      protected override void OnLaunched( LaunchActivatedEventArgs e )
+      protected async override void OnLaunched( LaunchActivatedEventArgs e )
       {
 #if DEBUG
          if ( System.Diagnostics.Debugger.IsAttached )
@@ -94,7 +94,21 @@ namespace Dots.WinApps.Shared
             // When the navigation stack isn't restored navigate to the first page,
             // configuring the new page by passing required information as a navigation
             // parameter
-            if ( !rootFrame.Navigate( typeof( MainPage ), e.Arguments ) )
+            Type initialPageType = typeof( LoginPage );
+            try
+            {
+               if ( await CredentialsHelper.LoginWithSavedCredentials() )
+               {
+                  initialPageType = typeof( GamesPage );
+               }
+            }
+            catch ( Exception )
+            {
+               CredentialsHelper.Logout();
+               initialPageType = typeof( LoginPage );
+            }
+
+            if ( !rootFrame.Navigate( initialPageType, e.Arguments ) )
             {
                throw new Exception( "Failed to create initial page" );
             }
@@ -137,10 +151,10 @@ namespace Dots.WinApps.Shared
       {
          base.OnActivated( args );
 #if WINDOWS_PHONE_APP
-            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
-            {
-                App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
-            }
+         if ( args.Kind == ActivationKind.WebAuthenticationBrokerContinuation )
+         {
+            ServiceHelper.MobileService.LoginComplete( args as WebAuthenticationBrokerContinuationEventArgs );
+         }
 #endif
       }
    }
