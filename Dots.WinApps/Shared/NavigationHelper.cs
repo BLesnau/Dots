@@ -275,7 +275,7 @@ namespace Dots.WinApps.Shared
              properties.IsMiddleButtonPressed )
             return;
 
-         // If back or foward are pressed (but not both) navigate appropriately
+         // If back or forward are pressed (but not both) navigate appropriately
          bool backPressed = properties.IsXButton1Pressed;
          bool forwardPressed = properties.IsXButton2Pressed;
          if ( backPressed ^ forwardPressed )

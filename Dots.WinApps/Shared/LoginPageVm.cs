@@ -1,13 +1,62 @@
 ﻿using System;
-using Windows.UI.Xaml.Controls;
 using Dots.WinApps.Shared.ServiceDataModels;
 using Dots.WinApps.Windows;
 using Microsoft.WindowsAzure.MobileServices;
 
 namespace Dots.WinApps.Shared
 {
+   public enum LoginPageStates
+   {
+      LoggedOut,
+      LoggingIn
+   }
+   
    public class LoginPageVm : VmBase
    {
+      public MobileServiceAuthenticationProvider? CurrentProvider { get; set; }
+
+      private LoginPageStates _loginState;
+      public LoginPageStates LoginState
+      {
+         get
+         {
+            return _loginState;
+         }
+         set
+         {
+            _loginState = value;
+            OnPropertyChanged( "LoginState" );
+         }
+      }
+
+      private bool _creatingAccount;
+      public bool CreatingAccount
+      {
+         get
+         {
+            return _creatingAccount;
+         }
+         set
+         {
+            _creatingAccount = value;
+            OnPropertyChanged( "CreatingAccount" );
+         }
+      }
+
+      private string _enteredUsername;
+      public string EnteredUsername
+      {
+         get
+         {
+            return _enteredUsername;
+         }
+         set
+         {
+            _enteredUsername = value;
+            OnPropertyChanged( "EnteredUsername" );
+         }
+      }
+
       public RelayCommand FacebookClick
       {
          get
@@ -40,6 +89,29 @@ namespace Dots.WinApps.Shared
          }
       }
 
+      public RelayCommand CreateAccountClick
+      {
+         get
+         {
+            return new RelayCommand( async () =>
+            {
+               var user = new User()
+               {
+                  Authenticator = CurrentProvider.ToString(),
+                  UserId = SettingsManager.AzureUser.UserId,
+                  UserName = EnteredUsername
+               };
+               await ServiceHelper.UserTable.InsertAsync( user );
+
+               SettingsManager.DotsUser = user;
+
+               SettingsManager.Save();
+
+               Page.Frame.Navigate( typeof( GamesPage ) );
+            } );
+         }
+      }
+
       private async void Login( MobileServiceAuthenticationProvider provider )
       {
          string msg = null;
@@ -47,24 +119,18 @@ namespace Dots.WinApps.Shared
          try
          {
             SettingsManager.AzureUser = await ServiceHelper.MobileService.LoginAsync( provider );
+            CurrentProvider = provider;
 
             SettingsManager.DotsUser = await CredentialsHelper.GetDotsUser( SettingsManager.AzureUser.UserId );
             if ( SettingsManager.DotsUser == null )
             {
-               var user = new User()
-               {
-                  Authenticator = provider.ToString(),
-                  UserId = SettingsManager.AzureUser.UserId,
-                  UserName = "MyAwesomeName"
-               };
-               await ServiceHelper.UserTable.InsertAsync( user );
-
-               SettingsManager.DotsUser = user;
+               CreatingAccount = true;
+               LoginState = LoginPageStates.LoggingIn;
             }
-
-            SettingsManager.Save();
-
-            Page.Frame.Navigate( typeof( GamesPage ) );
+            else
+            {
+               Page.Frame.Navigate( typeof( GamesPage ) );
+            }
          }
          catch ( Exception )
          {
@@ -81,6 +147,7 @@ namespace Dots.WinApps.Shared
       public void Logout()
       {
          CredentialsHelper.Logout();
+         CurrentProvider = null;
       }
    }
 }

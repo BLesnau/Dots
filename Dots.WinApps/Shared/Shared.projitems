@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SettingsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CredentialsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VisualStateEnumBindingBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VmBase.cs" />
   </ItemGroup>
 </Project>
