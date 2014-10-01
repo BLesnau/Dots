@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Resources;
 using Dots.WinApps.Shared.ServiceDataModels;
 using Dots.WinApps.Windows;
 using Microsoft.WindowsAzure.MobileServices;
@@ -10,7 +12,13 @@ namespace Dots.WinApps.Shared
       LoggedOut,
       LoggingIn
    }
-   
+
+   public enum ErrorStates
+   {
+      NoError,
+      Error
+   }
+
    public class LoginPageVm : VmBase
    {
       public MobileServiceAuthenticationProvider? CurrentProvider { get; set; }
@@ -26,6 +34,34 @@ namespace Dots.WinApps.Shared
          {
             _loginState = value;
             OnPropertyChanged( "LoginState" );
+         }
+      }
+
+      private ErrorStates _errorState;
+      public ErrorStates ErrorState
+      {
+         get
+         {
+            return _errorState;
+         }
+         set
+         {
+            _errorState = value;
+            OnPropertyChanged( "ErrorState" );
+         }
+      }
+
+      private string _errorText;
+      public string ErrorText
+      {
+         get
+         {
+            return _errorText;
+         }
+         set
+         {
+            _errorText = value;
+            OnPropertyChanged( "ErrorText" );
          }
       }
 
@@ -95,26 +131,48 @@ namespace Dots.WinApps.Shared
          {
             return new RelayCommand( async () =>
             {
-               var user = new User()
+               ErrorState = ErrorStates.NoError;
+               
+               try
                {
-                  Authenticator = CurrentProvider.ToString(),
-                  UserId = SettingsManager.AzureUser.UserId,
-                  UserName = EnteredUsername
-               };
-               await ServiceHelper.UserTable.InsertAsync( user );
+                  var user = new User()
+                  {
+                     Authenticator = CurrentProvider.ToString(),
+                     UserId = SettingsManager.AzureUser.UserId,
+                     UserName = EnteredUsername
+                  };
+                  await ServiceHelper.UserTable.InsertAsync( user );
 
-               SettingsManager.DotsUser = user;
+                  SettingsManager.DotsUser = user;
 
-               SettingsManager.Save();
+                  SettingsManager.Save();
 
-               Page.Frame.Navigate( typeof( GamesPage ) );
+                  Page.Frame.Navigate( typeof( GamesPage ) );
+               }
+               catch ( MobileServiceInvalidOperationException ex )
+               {
+                  if ( ex.Response.StatusCode == WebDAVStatusCode.UnprocessableEntity )
+                  {
+                     ErrorText = "Your username must be between 5 and 20 characters long.";
+                  }
+                  else if ( ex.Response.StatusCode == HttpStatusCode.Conflict )
+                  {
+                     ErrorText = "That username already exists.";
+                  }
+                  else
+                  {
+                     ErrorText = "An error occurred while creating your account. Please try again.";                     
+                  }
+
+                  ErrorState = ErrorStates.Error;
+               }
             } );
          }
       }
 
       private async void Login( MobileServiceAuthenticationProvider provider )
       {
-         string msg = null;
+         ErrorState = ErrorStates.NoError;
 
          try
          {
@@ -135,17 +193,15 @@ namespace Dots.WinApps.Shared
          catch ( Exception )
          {
             Logout();
-            msg = "An error occurred while signing in.";
-         }
-
-         if ( msg != null )
-         {
-            await PopupHelper.ShowMessage( msg );
+            ErrorText = "An error occurred while signing in. Please try again.";
+            ErrorState = ErrorStates.Error;
          }
       }
 
       public void Logout()
       {
+         ErrorState = ErrorStates.NoError;
+
          CredentialsHelper.Logout();
          CurrentProvider = null;
       }

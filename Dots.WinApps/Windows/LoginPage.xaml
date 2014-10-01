@@ -9,6 +9,17 @@
                  d:DataContext="{d:DesignInstance Type=shared:LoginPageVm}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="errorText" HorizontalAlignment="Center"
+                   Margin="0,233,0,0"
+                   TextWrapping="Wrap"
+                   Text="{Binding ErrorText}"
+                   VerticalAlignment="Top"
+                   Height="Auto"
+                   Width="Auto"
+                   Foreground="Red"
+                   FontSize="22"
+                   TextAlignment="Center" />
+
         <StackPanel x:Name="loginButtons"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
@@ -28,7 +39,8 @@
 
         <StackPanel x:Name="loggingInUI"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Opacity="0">
+                    VerticalAlignment="Center"
+                    Opacity="0">
             <TextBlock HorizontalAlignment="Center"
                        Text="Account Setup"
                        FontSize="40"></TextBlock>
@@ -69,6 +81,14 @@
                                          Storyboard.TargetProperty="(UIElement.Opacity)"
                                          Storyboard.TargetName="loginButtons"
                                          d:IsOptimized="True" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                       Storyboard.TargetName="loggingInUI">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="LoggingIn">
@@ -77,7 +97,7 @@
                                                        Storyboard.TargetName="loginButtons">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
+                                    <Visibility>Collapsed</Visibility>
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
@@ -101,6 +121,20 @@
                                          d:IsOptimized="True" />
                     </Storyboard>
                 </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="ErrorStates">
+                <VisualState x:Name="NoError" >
+                	<Storyboard>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="errorText">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                	</Storyboard>
+                </VisualState>
+                <VisualState x:Name="Error"/>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

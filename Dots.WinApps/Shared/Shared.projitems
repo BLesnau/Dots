@@ -29,5 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VisualStateEnumBindingBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VmBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebDAVStatusCode.cs" />
   </ItemGroup>
 </Project>
