@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.UI.Xaml.Controls;
 
 namespace Dots.WinApps.Shared
 {
     public class VmBase : INotifyPropertyChanged
     {
-       public PageBase Page { get; set; }
-
        public event PropertyChangedEventHandler PropertyChanged;
 
        protected virtual void OnPropertyChanged( [CallerMemberName] string propertyName = null )

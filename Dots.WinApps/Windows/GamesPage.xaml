@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand}"
+            <Button Margin="39,59,39,0" Command="{Binding Page.NavigationHelper.GoBackCommand}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Top"/>
             <TextBlock Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 

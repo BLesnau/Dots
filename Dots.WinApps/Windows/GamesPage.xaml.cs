@@ -9,8 +9,8 @@ namespace Dots.WinApps.Windows
       public GamesPage()
       {
          InitializeComponent();
-   
-         ViewModel = new GamesPageVm() { Page = this };
+
+         ViewModel = new GamesPageVm( this );
          DataContext = ViewModel;
       }
    }

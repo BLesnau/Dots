@@ -19,7 +19,7 @@ namespace Dots.WinApps.Shared
       Error
    }
 
-   public class LoginPageVm : VmBase
+   public class LoginPageVm : PageVmBase
    {
       public MobileServiceAuthenticationProvider? CurrentProvider { get; set; }
 
@@ -65,20 +65,6 @@ namespace Dots.WinApps.Shared
          }
       }
 
-      private bool _creatingAccount;
-      public bool CreatingAccount
-      {
-         get
-         {
-            return _creatingAccount;
-         }
-         set
-         {
-            _creatingAccount = value;
-            OnPropertyChanged( "CreatingAccount" );
-         }
-      }
-
       private string _enteredUsername;
       public string EnteredUsername
       {
@@ -91,6 +77,12 @@ namespace Dots.WinApps.Shared
             _enteredUsername = value;
             OnPropertyChanged( "EnteredUsername" );
          }
+      }
+
+      public LoginPageVm( PageBase page )
+         : base( page )
+      {
+
       }
 
       public RelayCommand FacebookClick
@@ -132,7 +124,7 @@ namespace Dots.WinApps.Shared
             return new RelayCommand( async () =>
             {
                ErrorState = ErrorStates.NoError;
-               
+
                try
                {
                   var user = new User()
@@ -161,7 +153,7 @@ namespace Dots.WinApps.Shared
                   }
                   else
                   {
-                     ErrorText = "An error occurred while creating your account. Please try again.";                     
+                     ErrorText = "An error occurred while creating your account. Please try again.";
                   }
 
                   ErrorState = ErrorStates.Error;
@@ -182,13 +174,14 @@ namespace Dots.WinApps.Shared
             SettingsManager.DotsUser = await CredentialsHelper.GetDotsUser( SettingsManager.AzureUser.UserId );
             if ( SettingsManager.DotsUser == null )
             {
-               CreatingAccount = true;
                LoginState = LoginPageStates.LoggingIn;
             }
             else
             {
                Page.Frame.Navigate( typeof( GamesPage ) );
             }
+
+            SettingsManager.Save();
          }
          catch ( Exception )
          {

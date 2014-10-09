@@ -2,8 +2,14 @@
 
 namespace Dots.WinApps.Shared
 {
-    public class GamesPageVm : VmBase
+    public class GamesPageVm : PageVmBase
     {
+       public GamesPageVm( PageBase page )
+         : base( page )
+      {
+
+      }
+
        public RelayCommand LogoutClick
        {
           get

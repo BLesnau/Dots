@@ -9,8 +9,9 @@
                  d:DataContext="{d:DesignInstance Type=shared:LoginPageVm}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="errorText" HorizontalAlignment="Center"
-                   Margin="0,233,0,0"
+        <TextBlock x:Name="errorText"
+                   HorizontalAlignment="Stretch"
+                   Margin="100,233,100,0"
                    TextWrapping="Wrap"
                    Text="{Binding ErrorText}"
                    VerticalAlignment="Top"
@@ -123,18 +124,19 @@
                 </VisualState>
             </VisualStateGroup>
             <VisualStateGroup x:Name="ErrorStates">
-                <VisualState x:Name="NoError" >
-                	<Storyboard>
-                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="errorText">
-                			<DiscreteObjectKeyFrame KeyTime="0">
-                				<DiscreteObjectKeyFrame.Value>
-                					<Visibility>Collapsed</Visibility>
-                				</DiscreteObjectKeyFrame.Value>
-                			</DiscreteObjectKeyFrame>
-                		</ObjectAnimationUsingKeyFrames>
-                	</Storyboard>
+                <VisualState x:Name="NoError">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                       Storyboard.TargetName="errorText">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
                 </VisualState>
-                <VisualState x:Name="Error"/>
+                <VisualState x:Name="Error" />
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
