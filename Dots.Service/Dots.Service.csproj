@@ -178,31 +178,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\User.cs" />
-    <Compile Include="Migrations\201409040550575_InitialCreate.cs" />
-    <Compile Include="Migrations\201409040550575_InitialCreate.Designer.cs">
-      <DependentUpon>201409040550575_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040602151_AddUsers.cs" />
-    <Compile Include="Migrations\201409040602151_AddUsers.Designer.cs">
-      <DependentUpon>201409040602151_AddUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040610549_RemoveAllUsers.cs" />
-    <Compile Include="Migrations\201409040610549_RemoveAllUsers.Designer.cs">
-      <DependentUpon>201409040610549_RemoveAllUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040616286_AddUserName.cs" />
-    <Compile Include="Migrations\201409040616286_AddUserName.Designer.cs">
-      <DependentUpon>201409040616286_AddUserName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040620402_AddUserAuth.cs" />
-    <Compile Include="Migrations\201409040620402_AddUserAuth.Designer.cs">
-      <DependentUpon>201409040620402_AddUserAuth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409040623479_AddUserId.cs" />
-    <Compile Include="Migrations\201409040623479_AddUserId.Designer.cs">
-      <DependentUpon>201409040623479_AddUserId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotsServiceContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">
@@ -235,26 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\mobile-dots.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409040550575_InitialCreate.resx">
-      <DependentUpon>201409040550575_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040602151_AddUsers.resx">
-      <DependentUpon>201409040602151_AddUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040610549_RemoveAllUsers.resx">
-      <DependentUpon>201409040610549_RemoveAllUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040616286_AddUserName.resx">
-      <DependentUpon>201409040616286_AddUserName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040620402_AddUserAuth.resx">
-      <DependentUpon>201409040620402_AddUserAuth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409040623479_AddUserId.resx">
-      <DependentUpon>201409040623479_AddUserId.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
