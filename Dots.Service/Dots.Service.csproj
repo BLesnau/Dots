@@ -178,6 +178,27 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\User.cs" />
+    <Compile Include="Migrations\201410120430102_Initial.cs" />
+    <Compile Include="Migrations\201410120430102_Initial.Designer.cs">
+      <DependentUpon>201410120430102_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410120431444_AddTest.cs" />
+    <Compile Include="Migrations\201410120431444_AddTest.Designer.cs">
+      <DependentUpon>201410120431444_AddTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410120432280_RemoveTest.cs" />
+    <Compile Include="Migrations\201410120432280_RemoveTest.Designer.cs">
+      <DependentUpon>201410120432280_RemoveTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410120435226_AddTest2.cs" />
+    <Compile Include="Migrations\201410120435226_AddTest2.Designer.cs">
+      <DependentUpon>201410120435226_AddTest2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410120436302_RemoveTest2.cs" />
+    <Compile Include="Migrations\201410120436302_RemoveTest2.Designer.cs">
+      <DependentUpon>201410120436302_RemoveTest2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotsServiceContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,7 +230,26 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\mobile-dots.pubxml" />
+    <None Include="Properties\PublishProfiles\mobile-dots.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410120430102_Initial.resx">
+      <DependentUpon>201410120430102_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410120431444_AddTest.resx">
+      <DependentUpon>201410120431444_AddTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410120432280_RemoveTest.resx">
+      <DependentUpon>201410120432280_RemoveTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410120435226_AddTest2.resx">
+      <DependentUpon>201410120435226_AddTest2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410120436302_RemoveTest2.resx">
+      <DependentUpon>201410120436302_RemoveTest2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
