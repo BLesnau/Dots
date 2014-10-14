@@ -4,6 +4,7 @@
    {
       public PageVmBase( PageBase page )
       {
+         Page = page;
       }
 
       public PageBase Page { get; set; }

@@ -5,18 +5,21 @@ namespace Dots.WinApps.Shared
 {
    public partial class PageBase : Page
    {
+      public VmBase ViewModel { get; set; }
       public NavigationHelper NavigationHelper { get; set; }
 
       public PageBase()
       {
-         //Loaded += PageLoaded;
+         NavigationHelper = new NavigationHelper( this );
+         NavigationHelper.LoadState += LoadState;
+         NavigationHelper.SaveState += SaveState;
+
+         Loaded += PageLoaded;
       }
 
       void PageLoaded( object sender, global::Windows.UI.Xaml.RoutedEventArgs e )
       {
-         NavigationHelper = new NavigationHelper( this );
-         NavigationHelper.LoadState += LoadState;
-         NavigationHelper.SaveState += SaveState;
+         DataContext = ViewModel;
       }
 
       public void LoadState( object sender, LoadStateEventArgs e )
@@ -37,12 +40,12 @@ namespace Dots.WinApps.Shared
 
       protected override void OnNavigatedTo( NavigationEventArgs e )
       {
-        // NavigationHelper.OnNavigatedTo( e );
+         NavigationHelper.OnNavigatedTo( e );
       }
 
       protected override void OnNavigatedFrom( NavigationEventArgs e )
       {
-        // NavigationHelper.OnNavigatedFrom( e );
+         NavigationHelper.OnNavigatedFrom( e );
       }
    }
 }

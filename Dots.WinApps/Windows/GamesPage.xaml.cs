@@ -4,14 +4,10 @@ namespace Dots.WinApps.Windows
 {
    public sealed partial class GamesPage : PageBase
    {
-      public GamesPageVm ViewModel { get; set; }
-
       public GamesPage()
       {
          InitializeComponent();
-
          ViewModel = new GamesPageVm( this );
-         DataContext = ViewModel;
       }
    }
 }
